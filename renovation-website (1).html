@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RenovaCraft Malaysia – Premium Renovation Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --dark: #0F0E0A;
+    --dark2: #1A1916;
+    --dark3: #242320;
+    --cream: #F5F0E8;
+    --cream2: #EDE8DC;
+    --text: #2A2820;
+    --text-muted: #7A7665;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.3;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 24px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(15,14,10,0.95) 0%, rgba(15,14,10,0) 100%);
+    transition: background 0.4s;
+  }
+  nav.scrolled { background: rgba(15,14,10,0.97); backdrop-filter: blur(20px); }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 10px 24px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    margin-bottom: 28px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+    max-width: 420px;
+    margin-bottom: 48px;
+  }
+
+  .hero-btns { display: flex; gap: 16px; align-items: center; }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 16px 36px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,168,76,0.3); }
+
+  .btn-ghost {
+    color: rgba(255,255,255,0.7);
+    padding: 16px 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover { color: var(--white); border-color: var(--white); }
+
+  .hero-stats {
+    margin-top: 64px;
+    display: flex;
+    gap: 48px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-img-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+  }
+  .hero-img-grid div {
+    background: var(--dark3);
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-img-grid div::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), transparent 60%);
+  }
+  .hero-img-grid div img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    transition: opacity 0.5s, transform 0.8s;
+  }
+  .hero-img-grid div:hover img { opacity: 0.9; transform: scale(1.04); }
+
+  .hero-gold-bar {
+    position: absolute;
+    left: -2px; top: 20%; bottom: 20%;
+    width: 4px;
+    background: var(--gold);
+    z-index: 3;
+  }
+
+  /* ─── SERVICES ─── */
+  #services {
+    background: var(--cream);
+    color: var(--text);
+    padding: 120px 80px;
+  }
+
+  .section-header { margin-bottom: 80px; }
+  .section-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(0,0,0,0.08);
+  }
+
+  .service-card {
+    background: var(--cream2);
+    padding: 52px 44px;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: background 0.4s;
+  }
+  .service-card:hover { background: var(--dark); }
+  .service-card:hover .service-icon { color: var(--gold); }
+  .service-card:hover .service-name { color: var(--white); }
+  .service-card:hover .service-desc { color: rgba(255,255,255,0.6); }
+  .service-card:hover .service-num { color: rgba(201,168,76,0.15); }
+
+  .service-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(0,0,0,0.06);
+    position: absolute;
+    top: 16px; right: 24px;
+    line-height: 1;
+    transition: color 0.4s;
+  }
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 24px;
+    color: var(--gold);
+    transition: color 0.4s;
+  }
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 14px;
+    line-height: 1.3;
+    transition: color 0.4s;
+  }
+  .service-desc {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    transition: color 0.4s;
+  }
+
+  /* ─── WHY US ─── */
+  #why {
+    background: var(--dark2);
+    padding: 120px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  .why-left .section-title { color: var(--white); }
+
+  .why-points { margin-top: 56px; display: flex; flex-direction: column; gap: 32px; }
+
+  .why-point {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .why-icon-box {
+    width: 56px; height: 56px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: background 0.3s;
+  }
+  .why-point:hover .why-icon-box { background: rgba(201,168,76,0.2); }
+  .why-point-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .why-point-desc { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+  .why-right {
+    position: relative;
+  }
+  .why-img-main {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    background: var(--dark3);
+    display: block;
+  }
+  .why-badge {
+    position: absolute;
+    bottom: -24px; left: -24px;
+    background: var(--gold);
+    color: var(--dark);
+    padding: 32px 36px;
+    text-align: center;
+  }
+  .why-badge-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .why-badge-text { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
+
+  /* ─── PROJECTS ─── */
+  #projects {
+    background: var(--dark);
+    padding: 120px 80px;
+  }
+
+  .projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+  }
+  .projects-header .section-title { color: var(--white); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .project-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .project-card:first-child {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .project-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    display: block;
+    background: linear-gradient(135deg, var(--dark3) 0%, #2a2820 100%);
+    transition: transform 0.6s;
+    filter: brightness(0.6);
+  }
+  .project-card:first-child .project-img { aspect-ratio: 16/9; }
+
+  .project-card:hover .project-img { transform: scale(1.05); filter: brightness(0.8); }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,9,7,0.9) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px;
+    transition: opacity 0.4s;
+  }
+
+  .project-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .project-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .project-card:first-child .project-name { font-size: 2rem; }
+  .project-location {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .project-arrow {
+    position: absolute;
+    top: 24px; right: 24px;
+    width: 44px; height: 44px;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--dark);
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s;
+  }
+  .project-card:hover .project-arrow { opacity: 1; transform: scale(1); }
+
+  /* PLACEHOLDER IMAGES */
+  .img-placeholder {
+    width: 100%; height: 100%;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ─── PROCESS ─── */
+  #process {
+    background: var(--cream);
+    color: var(--text);
+    padding: 120px 80px;
+  }
+  #process .section-title { color: var(--text); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 72px;
+    position: relative;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 32px; left: 10%; right: 10%;
+    height: 1px;
+    background: repeating-linear-gradient(to right, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 16px);
+    z-index: 0;
+  }
+
+  .process-step {
+    text-align: center;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .process-circle {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--dark);
+    border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 32px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    transition: background 0.3s;
+  }
+  .process-step:hover .process-circle { background: var(--gold); color: var(--dark); }
+  .process-step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .process-step-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials {
+    background: var(--dark2);
+    padding: 120px 80px;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 64px;
+  }
+
+  .testimonial-card {
+    background: var(--dark3);
+    padding: 40px 36px;
+    border-top: 2px solid var(--gold);
+    transition: transform 0.3s;
+  }
+  .testimonial-card:hover { transform: translateY(-6px); }
+
+  .testimonial-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 20px; letter-spacing: 3px; }
+  .testimonial-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; }
+  .author-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--dark3));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--dark);
+  }
+  .author-name { font-weight: 600; font-size: 0.9rem; }
+  .author-location { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+  /* ─── CTA ─── */
+  #cta {
+    background: var(--gold);
+    padding: 100px 80px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 60px;
+  }
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.15;
+  }
+  .cta-sub { font-size: 1rem; color: rgba(10,9,7,0.65); margin-top: 12px; }
+  .btn-dark {
+    background: var(--dark);
+    color: var(--gold);
+    padding: 18px 44px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    display: inline-block;
+    transition: all 0.3s;
+  }
+  .btn-dark:hover { background: #1a1916; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    padding: 80px 80px 40px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-brand .nav-logo { font-size: 1.6rem; display: block; margin-bottom: 16px; text-decoration: none; }
+  .footer-brand p { font-size: 0.875rem; color: rgba(255,255,255,0.45); line-height: 1.75; max-width: 260px; }
+  .footer-col h4 {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.875rem; transition: color 0.3s; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-contact p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.75; }
+  .footer-contact strong { color: var(--gold); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 4px; margin-top: 16px; }
+  .footer-bottom {
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 120px 24px 48px; }
+    .hero-right { height: 50vw; position: relative; }
+    .hero-img-grid { position: relative; height: 100%; }
+    #services, #why, #projects, #process, #testimonials, #cta, footer { padding: 80px 24px; }
+    .services-grid, .testimonials-grid, .process-steps { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card:first-child { grid-column: span 1; }
+    #why { grid-template-columns: 1fr; gap: 48px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    #cta { grid-template-columns: 1fr; gap: 32px; }
+    .process-steps::before { display: none; }
+    .projects-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Renova<span>Craft</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#why">About Us</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Get a Quote</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Malaysia's Premier Renovation Specialists</div>
+    <h1 class="hero-title">
+      Crafting Spaces<br>You'll <em>Love</em><br>to Live In
+    </h1>
+    <p class="hero-desc">
+      From full home renovations to bespoke interior transformations — we deliver unmatched quality, honest pricing, and zero delays. Your dream space, built with precision.
+    </p>
+    <div class="hero-btns">
+      <a href="#cta" class="btn-primary">Get Free Consultation</a>
+      <a href="#projects" class="btn-ghost">See Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div>
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Client Satisfaction</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-gold-bar"></div>
+    <div class="hero-img-grid">
+      <div style="background: linear-gradient(135deg, #2a2820 0%, #1a1610 100%);">
+        <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80" alt="Modern living room renovation" />
+      </div>
+      <div style="background: linear-gradient(135deg, #1e1b15 0%, #2a2820 100%);">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80" alt="Kitchen renovation" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">What We Offer</div>
+    <h2 class="section-title">Complete Renovation <em>Solutions</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon">🏠</div>
+      <div class="service-name">Full Home Renovation</div>
+      <p class="service-desc">End-to-end transformation of your entire home — from structural work to the final finishing touches. We manage every detail so you don't have to.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <div class="service-icon">🍳</div>
+      <div class="service-name">Kitchen & Bathroom</div>
+      <p class="service-desc">Reimagine your most-used spaces with premium fixtures, custom cabinetry, and clever layouts designed for both function and beauty.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <div class="service-icon">🏢</div>
+      <div class="service-name">Commercial & Office</div>
+      <p class="service-desc">Create workspaces that boost productivity and impress clients. We deliver on-time, on-budget commercial renovations with minimal business disruption.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-num">04</div>
+      <div class="service-icon">🪵</div>
+      <div class="service-name">Interior Design & Fit-Out</div>
+      <p class="service-desc">From concept to completion, our designers craft cohesive interiors that reflect your personality and elevate your everyday living experience.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">05</div>
+      <div class="service-icon">🔧</div>
+      <div class="service-name">Structural Works & Extensions</div>
+      <p class="service-desc">Need more space? We handle additions, extensions, and structural modifications with full regulatory compliance and engineering oversight.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">06</div>
+      <div class="service-icon">✨</div>
+      <div class="service-name">Repainting & Finishing</div>
+      <p class="service-desc">A fresh coat can transform a space. Our finishing specialists deliver flawless paint jobs, plaster, and surface treatments that last for years.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-left">
+    <div class="section-eyebrow" style="color: var(--gold)">Why Choose Us</div>
+    <h2 class="section-title reveal" style="color: var(--white)">The <em>RenovaCraft</em><br>Promise</h2>
+    <div class="why-points">
+      <div class="why-point reveal">
+        <div class="why-icon-box">💰</div>
+        <div>
+          <div class="why-point-title">Best Prices, Zero Hidden Costs</div>
+          <p class="why-point-desc">We provide detailed, transparent quotations with no surprise charges. Competitive pricing across all renovation tiers — from budget-friendly to premium.</p>
+        </div>
+      </div>
+      <div class="why-point reveal reveal-delay-1">
+        <div class="why-icon-box">⚡</div>
+        <div>
+          <div class="why-point-title">Fastest Lead Times in Malaysia</div>
+          <p class="why-point-desc">Our streamlined project management and dedicated teams mean we consistently deliver on schedule — often ahead of it. We respect your time.</p>
+        </div>
+      </div>
+      <div class="why-point reveal reveal-delay-2">
+        <div class="why-icon-box">🤝</div>
+        <div>
+          <div class="why-point-title">5-Star Customer Service</div>
+          <p class="why-point-desc">A dedicated project manager keeps you updated every step of the way. We're reachable 7 days a week because your peace of mind matters to us.</p>
+        </div>
+      </div>
+      <div class="why-point reveal reveal-delay-3">
+        <div class="why-icon-box">🛡️</div>
+        <div>
+          <div class="why-point-title">Quality Guaranteed</div>
+          <p class="why-point-desc">All work comes with our craftsmanship warranty. We use only certified materials and skilled tradespeople who take pride in what they build.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="why-right reveal">
+    <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=700&q=80" alt="Beautiful renovation" class="why-img-main" />
+    <div class="why-badge">
+      <div class="why-badge-num">12+</div>
+      <div class="why-badge-text">Years Trusted<br>in Malaysia</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-header">
+    <div>
+      <div class="section-eyebrow" style="color:var(--gold)">Our Portfolio</div>
+      <h2 class="section-title" style="color:var(--white)">Past <em>Projects</em></h2>
+    </div>
+    <a href="#cta" class="btn-primary">Start Your Project</a>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=900&q=80" alt="Bangsar Bungalow" class="project-img" style="aspect-ratio:16/9" />
+      <div class="project-overlay">
+        <div class="project-tag">Full Renovation · Kuala Lumpur</div>
+        <div class="project-name">The Bangsar Modern Bungalow</div>
+        <div class="project-location">📍 Bangsar, KL — 3,200 sqft · Completed 2024</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80" alt="Petaling Jaya Condo" class="project-img" />
+      <div class="project-overlay">
+        <div class="project-tag">Interior · Selangor</div>
+        <div class="project-name">PJ Condo Transformation</div>
+        <div class="project-location">📍 Petaling Jaya</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?w=600&q=80" alt="Cafe renovation" class="project-img" />
+      <div class="project-overlay">
+        <div class="project-tag">Commercial · Penang</div>
+        <div class="project-name">Heritage Café Fit-Out</div>
+        <div class="project-location">📍 George Town, Penang</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600&q=80" alt="Master bedroom" class="project-img" />
+      <div class="project-overlay">
+        <div class="project-tag">Bedroom · Johor Bahru</div>
+        <div class="project-name">JB Master Suite Redesign</div>
+        <div class="project-location">📍 Johor Bahru</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-card reveal reveal-delay-3">
+      <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=80" alt="Kitchen renovation" class="project-img" />
+      <div class="project-overlay">
+        <div class="project-tag">Kitchen · Subang Jaya</div>
+        <div class="project-name">Subang Open Kitchen Concept</div>
+        <div class="project-location">📍 Subang Jaya, Selangor</div>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-header reveal" style="text-align:center">
+    <div class="section-eyebrow" style="justify-content:center">How It Works</div>
+    <h2 class="section-title">Our Simple 4-Step <em>Process</em></h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="process-circle">01</div>
+      <div class="process-step-title">Free Consultation</div>
+      <p class="process-step-desc">Tell us your vision, budget, and timeline. We visit your site and listen carefully to understand exactly what you want to achieve.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="process-circle">02</div>
+      <div class="process-step-title">Custom Proposal</div>
+      <p class="process-step-desc">Receive a detailed, itemised quotation with design concepts, material options, and a clear project schedule — no vague estimates.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="process-circle">03</div>
+      <div class="process-step-title">Expert Execution</div>
+      <p class="process-step-desc">Our certified team gets to work with regular progress updates. A dedicated project manager ensures quality at every milestone.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="process-circle">04</div>
+      <div class="process-step-title">Handover & After-Care</div>
+      <p class="process-step-desc">We walk you through every detail of your completed space. Our warranty support means we're still here long after the job is done.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header reveal" style="text-align:center">
+    <div class="section-eyebrow" style="justify-content:center; color:var(--gold)">Client Reviews</div>
+    <h2 class="section-title" style="color:var(--white)">What Our Clients <em>Say</em></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"RenovaCraft transformed our entire home in just 6 weeks. The team was professional, clean, and the quality exceeded our expectations. Best renovation decision we've made."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">Ahmad Faizal</div>
+          <div class="author-location">Bangsar, Kuala Lumpur</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Incredibly competitive pricing without cutting corners on quality. My kitchen looks like something from a magazine. The project manager kept me updated every single day."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <div class="author-name">Siti Norzilah</div>
+          <div class="author-location">Petaling Jaya, Selangor</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Hired them for our café fit-out in Penang. On time, on budget, and they understood the heritage aesthetic we were going for. Will definitely use them for our next outlet."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">C</div>
+        <div>
+          <div class="author-name">Clarence Tan</div>
+          <div class="author-location">George Town, Penang</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div>
+    <div class="section-eyebrow" style="color: rgba(10,9,7,0.55)">Ready to Begin?</div>
+    <h2 class="cta-title">Let's Transform Your<br>Space Together</h2>
+    <p class="cta-sub">Free consultation · No commitment · Malaysia-wide coverage</p>
+  </div>
+  <div>
+    <a href="tel:+60123456789" class="btn-dark" style="display:block;margin-bottom:14px;text-align:center">📞 Call Us Now</a>
+    <a href="https://wa.me/60123456789" class="btn-dark" style="display:block;text-align:center;background:#1a1916">💬 WhatsApp Us</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Renova<span>Craft</span></a>
+      <p>Malaysia's trusted renovation partner since 2012. We bring your dream spaces to life with quality craftsmanship, fair pricing, and outstanding service.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Full Home Renovation</a></li>
+        <li><a href="#">Kitchen & Bathroom</a></li>
+        <li><a href="#">Commercial Fit-Out</a></li>
+        <li><a href="#">Interior Design</a></li>
+        <li><a href="#">Extensions & Additions</a></li>
+        <li><a href="#">Painting & Finishing</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#projects">Our Projects</a></li>
+        <li><a href="#process">Our Process</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h4>Contact</h4>
+      <strong>Phone</strong>
+      <p>+60 12-345 6789</p>
+      <strong>WhatsApp</strong>
+      <p>+60 12-345 6789</p>
+      <strong>Email</strong>
+      <p>hello@renovacraft.com.my</p>
+      <strong>Areas Served</strong>
+      <p>Kuala Lumpur · Selangor · Penang · Johor · And more</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 RenovaCraft Malaysia. All rights reserved. · ROC No. XXXXXXX-X</p>
+    <p>Crafted with ❤️ in Malaysia</p>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
